@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "simple-qt-calculator"
+version = "1.0"
+description = "A simple Qt calculator"
+authors = ["Pedro G. <pedrogobira@tutanota.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.10"
+PySide2 = "^5.15.2"
+
+[tool.poetry.dev-dependencies]
+flake8-mypy = "^17.8.0"
+mypy = "^0.812"
+autopep8 = "^1.5.7"
+flake8 = "^3.9.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

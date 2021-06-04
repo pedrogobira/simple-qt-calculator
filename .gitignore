@@ -1,3 +1,4 @@
 .vscode
+poetry.lock
 env
 __pycache__

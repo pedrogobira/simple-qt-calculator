@@ -1,4 +1,5 @@
 from PySide2 import QtWidgets as qtw
+from simple_qt_calculator.calculator import run_calculator
 
 
 class MainWindow(qtw.QMainWindow):
@@ -42,6 +43,7 @@ class MainWindow(qtw.QMainWindow):
         btn_1 = qtw.QPushButton('1', clicked=lambda: self.num_press('1'))
         btn_0 = qtw.QPushButton('0', clicked=lambda: self.num_press('0'))
 
+        btn_comma = qtw.QPushButton(',', clicked=lambda: self.num_press(','))
         btn_plus = qtw.QPushButton('+', clicked=lambda: self.op_press('+'))
         btn_minus = qtw.QPushButton('-', clicked=lambda: self.op_press('-'))
         btn_mult = qtw.QPushButton('*', clicked=lambda: self.op_press('*'))
@@ -63,11 +65,12 @@ class MainWindow(qtw.QMainWindow):
         container.layout().addWidget(btn_2, 4, 1)
         container.layout().addWidget(btn_3, 4, 2)
         container.layout().addWidget(btn_mult, 4, 3)
-        container.layout().addWidget(btn_0, 5, 0, 1, 3)
+        container.layout().addWidget(btn_0, 5, 0, 1, 2)
+        container.layout().addWidget(btn_comma, 5, 2)
         container.layout().addWidget(btn_div, 5, 3)
 
         # Adicionando keypad ao widget principal de MainWindow
-        self.layout().addWidget(container)
+        self.central_widget.layout().addWidget(container)
 
     def num_press(self, number):
         self.temp_nums.append(number)
@@ -89,13 +92,8 @@ class MainWindow(qtw.QMainWindow):
         self.result_field.setText(''.join(self.op_nums))
 
     def func_enter(self):
-        temp_string = ''.join(self.op_nums) + ''.join(self.temp_nums)
-        result = eval(temp_string)
-
-        temp_string += '='
-        temp_string += str(result)
-
-        self.result_field.setText(temp_string)
+        result = run_calculator(self.result_field.text())
+        self.result_field.setText(str(result))
 
     def func_clear(self):
         self.result_field.clear()
